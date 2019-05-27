@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TransactionServiceTest extends KataApplicationTest {
 
@@ -35,5 +36,27 @@ public class TransactionServiceTest extends KataApplicationTest {
         actualAccount.setTransactions(new HashSet<>());
         transactionService.doDeposit(actualAccount, new BigDecimal(3000));
         assertEquals(new BigDecimal(5000), actualAccount.getBalance());
+    }
+
+    @Test
+    public void testDoWithdrawFromAccount() throws Exception {
+        //deposit On Account
+        Account actualAccount = new Account();
+        actualAccount.setBalance(new BigDecimal(2000));
+        actualAccount.setTransactions(new HashSet<>());
+        transactionService.doWithdraw(actualAccount, new BigDecimal(1000));
+        assertEquals(new BigDecimal(1000), actualAccount.getBalance());
+    }
+
+    @Test
+    public void testDoWithdrawFromAccountLimitReached() {
+        //deposit On Account
+        Account actualAccount = new Account();
+        BigDecimal withdrawAmount = new BigDecimal(2100);
+        actualAccount.setBalance(new BigDecimal(2000));
+        actualAccount.setTransactions(new HashSet<>());
+        assertFalse(accountService.isWithdrawAutorized(actualAccount, withdrawAmount));
+        //transactionService.doWithdraw(actualAccount, new BigDecimal(2100));
+        assertEquals(new BigDecimal(2000), actualAccount.getBalance());
     }
 }

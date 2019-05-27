@@ -48,6 +48,21 @@ public class TransactionService {
     }
 
     /**
+     * Do withdraw from account
+     *
+     * @param account
+     * @param amount
+     * @return
+     */
+    public void doWithdraw(Account account, BigDecimal amount) {
+        Transaction transaction = createTransaction(account, amount);
+        transaction.setNewBlance(account.getBalance().subtract(amount));
+        transaction.setTypeOperation(OperationType.WITHDRAW);
+        save(transaction);
+        updateAccountBalance(account, transaction);
+    }
+
+    /**
      * Update account balance
      *
      * @param account
