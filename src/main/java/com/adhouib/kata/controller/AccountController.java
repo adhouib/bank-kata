@@ -1,6 +1,7 @@
 package com.adhouib.kata.controller;
 
 import com.adhouib.kata.model.Account;
+import com.adhouib.kata.model.Transaction;
 import com.adhouib.kata.service.AccountService;
 import com.adhouib.kata.service.TransactionService;
 import io.swagger.annotations.Api;
@@ -83,4 +84,18 @@ public class AccountController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    /**
+     * Get the account History
+     *
+     * @param accountId
+     * @return
+     */
+    @ApiOperation(value = "Get the account History", response = Transaction.class)
+    @GetMapping(value = "{accountId}/history")
+    public ResponseEntity<Set<Transaction>> getAccountHistory(@PathVariable Long accountId) throws Exception {
+        return ResponseEntity.ok(accountService.history(accountId).getTransactions());
+    }
+
+
 }
