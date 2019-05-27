@@ -2,6 +2,7 @@ package com.adhouib.kata.service;
 
 import com.adhouib.kata.KataApplicationTest;
 import com.adhouib.kata.model.Account;
+import com.adhouib.kata.model.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -39,5 +40,19 @@ public class AccountServiceTest extends KataApplicationTest {
     public void testGetAccounts() {
         Mockito.when(accountService.getAccounts()).thenReturn(accounts);
         assertEquals(accounts.size(), accountService.getAccounts().size());
+    }
+
+    @Test
+    public void testGetHistory() throws Exception {
+        Account account = new Account();
+        account.setId(1l);
+        account.setBalance(new BigDecimal(3000));
+        account.setTransactions(new HashSet<>());
+        Transaction transaction = new Transaction();
+        transaction.setAmount(new BigDecimal("300"));
+        transaction.setAccount(account);
+        account.getTransactions().add(transaction);
+        Mockito.when(accountService.history(1l)).thenReturn(account);
+        assertEquals(1, account.getTransactions().size());
     }
 }

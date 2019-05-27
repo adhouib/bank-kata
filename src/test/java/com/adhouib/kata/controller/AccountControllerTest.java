@@ -75,4 +75,17 @@ public class AccountControllerTest extends KataApplicationTest {
                 put("/api/v1/account/1/withdraw/300")).andExpect(status().isBadRequest());
 
     }
+
+    @Test
+    public void getAccountHistoryTest() throws Exception {
+        Account account = new Account();
+        account.setId(1L);
+        account.setBalance(new BigDecimal(1000));
+        transactionService.doDeposit(account, new BigDecimal(1000));
+        transactionService.doDeposit(account, new BigDecimal(100));
+        when(accountService.history(1l)).thenReturn(account);
+        mockMvc.perform(
+                get("/api/v1/account/1/history")).andExpect(status().isOk());
+
+    }
 }
