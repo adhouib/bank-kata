@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.adhouib</groupId>
-    <artifactId>staffing</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <artifactId>kata</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>staffing</name>
-    <description>Staffing Web Application</description>
+    <name>kata-bank</name>
+    <description>Kata Bank Web Application</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <start-class>tn.technocity.recruitement.KataApplication</start-class>
+        <start-class>com.adhouib.kata.KataApplication</start-class>
     </properties>
 
     <dependencies>
@@ -32,10 +32,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
 
         <!-- Utils -->
@@ -59,20 +55,9 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.194</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
         </dependency>
 
     </dependencies>
