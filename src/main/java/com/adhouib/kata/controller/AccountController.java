@@ -62,4 +62,25 @@ public class AccountController {
 
         return ResponseEntity.badRequest().build();
     }
+
+    /**
+     * Withdraw from the account
+     *
+     * @param accountId
+     * @param amount
+     * @return
+     */
+    @ApiOperation(value = "Withdraw from the account", response = Account.class)
+    @PutMapping(value = "{accountId}/withdraw/{amount}")
+    public ResponseEntity<Account> doWithdraw(@PathVariable Long accountId, @PathVariable BigDecimal amount) throws Exception {
+
+        if (amount.doubleValue() > 0) {
+            Account account = accountService.findById(accountId);
+            if (accountService.isWithdrawAutorized(account, amount)) {
+                transactionService.doWithdraw(account, amount);
+                return ResponseEntity.ok(account);
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }

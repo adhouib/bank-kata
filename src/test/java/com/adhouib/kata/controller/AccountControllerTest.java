@@ -1,6 +1,7 @@
 package com.adhouib.kata.controller;
 
 import com.adhouib.kata.KataApplicationTest;
+import com.adhouib.kata.model.Account;
 import com.adhouib.kata.service.AccountService;
 import com.adhouib.kata.service.TransactionService;
 import org.junit.Before;
@@ -10,6 +11,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.math.BigDecimal;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,6 +49,30 @@ public class AccountControllerTest extends KataApplicationTest {
     public void doAccountDepositOnTest() throws Exception {
         mockMvc.perform(
                 put("/api/v1/account/1/deposit/200")).andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void doAccountWithdrawTest() throws Exception {
+        Account account = new Account();
+        account.setId(1L);
+        account.setBalance(new BigDecimal(1000));
+        when(accountService.findById(1l)).thenReturn(account);
+        when(accountService.isWithdrawAutorized(account, new BigDecimal(300))).thenReturn(true);
+        mockMvc.perform(
+                put("/api/v1/account/1/withdraw/300")).andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void doAccountWithdrawOverAvailableBalanceTest() throws Exception {
+        Account account = new Account();
+        account.setId(1L);
+        account.setBalance(new BigDecimal(1000));
+        when(accountService.findById(1l)).thenReturn(account);
+        when(accountService.isWithdrawAutorized(account, new BigDecimal(1300))).thenReturn(false);
+        mockMvc.perform(
+                put("/api/v1/account/1/withdraw/300")).andExpect(status().isBadRequest());
 
     }
 }
