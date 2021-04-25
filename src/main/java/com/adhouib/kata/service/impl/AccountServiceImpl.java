@@ -1,18 +1,19 @@
-package com.adhouib.kata.service;
+package com.adhouib.kata.service.impl;
 
 import com.adhouib.kata.model.Account;
-import com.adhouib.kata.repositories.AccountRepository;
+import com.adhouib.kata.repositories.impl.AccountRepository;
+import com.adhouib.kata.service.api.IAccountService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
-public class AccountService {
+public class AccountServiceImpl implements IAccountService {
 
     private final AccountRepository accountRepository;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

@@ -2,7 +2,9 @@ package com.adhouib.kata.service;
 
 import com.adhouib.kata.KataApplicationTest;
 import com.adhouib.kata.model.Account;
-import com.adhouib.kata.repositories.TransactionRepository;
+import com.adhouib.kata.repositories.impl.TransactionRepository;
+import com.adhouib.kata.service.impl.AccountServiceImpl;
+import com.adhouib.kata.service.impl.TransactionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -20,7 +22,7 @@ public class TransactionServiceTest extends KataApplicationTest {
     private TransactionService transactionService;
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Before
     public void setUp() {

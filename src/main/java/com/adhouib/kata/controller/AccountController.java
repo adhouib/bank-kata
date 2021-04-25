@@ -2,8 +2,8 @@ package com.adhouib.kata.controller;
 
 import com.adhouib.kata.model.Account;
 import com.adhouib.kata.model.Transaction;
-import com.adhouib.kata.service.AccountService;
-import com.adhouib.kata.service.TransactionService;
+import com.adhouib.kata.service.impl.AccountServiceImpl;
+import com.adhouib.kata.service.impl.TransactionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.Set;
 @Api(value = "AccountAPI")
 public class AccountController {
 
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
     private final TransactionService transactionService;
 
@@ -27,7 +27,7 @@ public class AccountController {
      * @param accountService
      * @param transactionService
      */
-    public AccountController(AccountService accountService, TransactionService transactionService) {
+    public AccountController(AccountServiceImpl accountService, TransactionService transactionService) {
         this.accountService = accountService;
         this.transactionService = transactionService;
     }

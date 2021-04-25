@@ -3,6 +3,7 @@ package com.adhouib.kata.service;
 import com.adhouib.kata.KataApplicationTest;
 import com.adhouib.kata.model.Account;
 import com.adhouib.kata.model.Transaction;
+import com.adhouib.kata.service.impl.AccountServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class AccountServiceTest extends KataApplicationTest {
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     private final Set<Account> accounts = new HashSet<>();
 

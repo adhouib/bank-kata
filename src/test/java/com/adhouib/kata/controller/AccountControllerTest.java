@@ -2,8 +2,8 @@ package com.adhouib.kata.controller;
 
 import com.adhouib.kata.KataApplicationTest;
 import com.adhouib.kata.model.Account;
-import com.adhouib.kata.service.AccountService;
-import com.adhouib.kata.service.TransactionService;
+import com.adhouib.kata.service.impl.AccountServiceImpl;
+import com.adhouib.kata.service.impl.TransactionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AccountControllerTest extends KataApplicationTest {
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Mock
     private TransactionService transactionService;

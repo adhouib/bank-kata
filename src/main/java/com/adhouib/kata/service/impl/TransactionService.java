@@ -1,23 +1,25 @@
-package com.adhouib.kata.service;
+package com.adhouib.kata.service.impl;
 
 import com.adhouib.kata.model.Account;
 import com.adhouib.kata.model.Transaction;
 import com.adhouib.kata.model.enums.OperationType;
-import com.adhouib.kata.repositories.TransactionRepository;
+import com.adhouib.kata.repositories.impl.TransactionRepository;
+import com.adhouib.kata.service.api.ITransactionService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+
 @Service
-public class TransactionService {
+public class TransactionService implements ITransactionService {
 
     private final TransactionRepository transactionRepository;
 
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountService accountService) {
+    public TransactionService(TransactionRepository transactionRepository, AccountServiceImpl accountService) {
         this.transactionRepository = transactionRepository;
         this.accountService = accountService;
     }
@@ -27,6 +29,7 @@ public class TransactionService {
      *
      * @param transaction
      */
+    @Override
     public void save(Transaction transaction) {
         transactionRepository.save(transaction);
     }
@@ -37,6 +40,7 @@ public class TransactionService {
      * @param account
      * @param amount
      */
+    @Override
     public void doDeposit(Account account, BigDecimal amount) {
         Transaction transaction = createTransaction(account, amount);
         transaction.setNewBlance(account.getBalance().add(amount));
@@ -54,6 +58,7 @@ public class TransactionService {
      * @param amount
      * @return
      */
+    @Override
     public void doWithdraw(Account account, BigDecimal amount) {
         Transaction transaction = createTransaction(account, amount);
         transaction.setNewBlance(account.getBalance().subtract(amount));

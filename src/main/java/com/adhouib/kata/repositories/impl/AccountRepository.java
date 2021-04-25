@@ -1,6 +1,7 @@
-package com.adhouib.kata.repositories;
+package com.adhouib.kata.repositories.impl;
 
 import com.adhouib.kata.model.Account;
+import com.adhouib.kata.repositories.api.IAccountRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -14,7 +15,7 @@ import java.util.Set;
  * Fake repository
  */
 @Component
-public class AccountRepository {
+public class AccountRepository implements IAccountRepository {
 
     private Set<Account> accounts;
 
